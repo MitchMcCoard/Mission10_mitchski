@@ -11,7 +11,9 @@ namespace Mission10_mitchski.Models
         public List<BasketLineItem> Items { get; set; } = new List<BasketLineItem>();
         //Items = new List<BasketLineItem>
 
-        public void AddItem(Book bk, int qty)
+
+        //The virtual class allows the method to be overridden (like when inheriting)
+        public virtual void AddItem(Book bk, int qty)
         {
             //Find the book assotiated with that ID
             BasketLineItem line = Items
@@ -33,6 +35,17 @@ namespace Mission10_mitchski.Models
             }
         }
 
+
+        public virtual void RemoveItem(Book BkToRemove)
+        {
+            Items.RemoveAll(x => x.Book.BookId == BkToRemove.BookId);
+
+        }
+
+        public virtual void ClearBasket()
+        {
+            Items.Clear();
+        }
 
         public double CalculateTotal()
         {

@@ -13,9 +13,10 @@ namespace Mission10_mitchski.Pages
     {
         private IBookstoreReposotory repo { get; }
 
-        public CheckoutModel(IBookstoreReposotory temp)
+        public CheckoutModel(IBookstoreReposotory temp, Basket b)
         {
             repo = temp;
+            basket = b;
         }
 
         public Basket basket { get; set; }
@@ -26,21 +27,34 @@ namespace Mission10_mitchski.Pages
             //Set the Attribute ReturnUrl to the return url passed in the hidden field which uses
             //the model in UrlExtensions, or if it's null, set it to "/"
             ReturnUrl = returnUrl ?? "/";   
-            basket = HttpContext.Session.GetJson<Basket>("basket") ?? new Basket();
+            
+            //No longer need to handle the session here, was pulled out into seperate class
+            //basket = HttpContext.Session.GetJson<Basket>("basket") ?? new Basket();
         }
 
         public IActionResult OnPost(int BookId, string returnUrl)
         {
             //Load the book from the repo which matches the id passed
             Book bk = repo.Books.FirstOrDefault(x => x.BookId == BookId);
-            
+
+            //No longer need to handle the session here, was pulled out into seperate class
             //If the basket exsists, use that. Otherwise, create a new basket
-            basket = HttpContext.Session.GetJson<Basket>("basket") ?? new Basket();
+            //basket = HttpContext.Session.GetJson<Basket>("basket") ?? new Basket();
             basket.AddItem(bk, 1);
 
+            //No longer need to handle the session here, was pulled out into seperate class
             //Save the basket to the session (in the json page)
-            HttpContext.Session.SetJson("basket", basket);
+            //HttpContext.Session.SetJson("basket", basket);
 
+            return RedirectToPage(new { ReturnUrl = returnUrl });
+        }
+
+
+        public IActionResult OnPostRemove(int bookId, string returnUrl)
+        {
+            //Remove the first item that matches the id
+            basket.RemoveItem(basket.Items.First(x => x.Book.BookId == bookId).Book);
+            
             return RedirectToPage(new { ReturnUrl = returnUrl });
         }
 
