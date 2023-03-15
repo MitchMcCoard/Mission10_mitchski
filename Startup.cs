@@ -35,6 +35,7 @@ namespace Mission10_mitchski
            });
 
             services.AddScoped<IBookstoreReposotory, EFBookstoreRepository>();
+            services.AddScoped<ITransactionRepository, EFTransactionRepository>();
 
             services.AddRazorPages();
 
@@ -44,6 +45,7 @@ namespace Mission10_mitchski
             //Get a new basket, if there isn't one
             services.AddScoped<Basket>(x => SessionBasket.GetBasket(x));
             services.AddSingleton<IHttpContextAccessor, HttpContextAccessor>();
+
 
         }
 

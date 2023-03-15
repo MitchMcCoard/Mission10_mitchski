@@ -20,7 +20,7 @@ namespace Mission10_mitchski.Models
         }
 
         public DbSet<Book> Books { get; set; }
-
+        public DbSet<Transaction> Transactions { get; set; }
 
     }
 }

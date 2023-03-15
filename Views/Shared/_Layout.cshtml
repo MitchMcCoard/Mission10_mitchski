@@ -5,10 +5,19 @@
     <meta name="viewport" content="width=device-width" />
     <title>@ViewBag.Title</title>
     <link href="~/lib/css/bootstrap.css" rel="stylesheet" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.12.0-1/css/all.min.css" integrity="sha512-ZYg+hQvLlM0W9C3P6vTpes5LmJ66G2EsroxDNzwD6qiulckldb29eD9I672HL2X+LH5nRhY1sQqZLJGB+aUUPg==" crossorigin="anonymous" referrerpolicy="no-referrer" />
 </head>
 <body>
-    <div class="bg-dark text-white p-2 navbar-nav">
-        <span class="navbar-brand ml-2 navbar-collapse navbar-nav-scroll">Mitch's Epic Bookstore</span>
+    <div class="bg-dark text-white p-2">
+        <div class="container-fluid">
+            <div class="row">
+                <div class="col navbar-brand">Mitch's Epic Bookstore</div>
+                <div class="col-1 align-content-start">
+                    <vc:cart-summary></vc:cart-summary>
+                </div>
+            </div>
+        </div>
+        @*<span class="navbar-brand ml-2 navbar-collapse navbar-nav-scroll">Mitch's Epic Bookstore</span>*@
     </div>
     <div class="row m-1 p-1">
         <div id="categories" class="col-3">
